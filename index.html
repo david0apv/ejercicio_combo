@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Comboland</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<form action="#" onreset="munReset()">
+	<select id="estado">
+		<option value="X">Selecciona un estado</option>
+		<option value="0">CDMX</option>
+		<option value="1">Michoacan</option>
+	</select>
+	<select id="municipio">
+		<option value="0">Selecciona un municipio</option>
+	</select>
+	<input type="reset" value="Limpiar">
+	<input type="submit" value="Enviar">
+</form>
+<div id="res"><br></div>
+
+<script type="text/javascript">
+	$('#estado').on('change',function(){
+   		var estid = $(this).val();
+   		if (estid == "X") {$("#municipio").html('<option value="0">Selecciona un municipio</option>');}
+   		else {$("#municipio").load("combo.php?op=1&id="+estid);}
+	});
+	$("form").submit(function(){
+		var est = $('#estado').val();
+		var mun = $('#municipio').val();
+	    $("#res").load("combo.php?op=2&id="+est+"&mn="+mun);
+	});
+	function munReset() {
+		$("#municipio").html('<option value="0">Selecciona un municipio</option>');
+		$("#res").html('<br>');
+	}
+</script>
+</body>
+</html>
